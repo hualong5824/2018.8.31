@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <p>{{a}}</p>
+        <p>{{b}}</p> -->
+        <!-- <p>{{c=a+b}}</p> -->
+
+        <!-- 现象: data中的属性c的值依赖于data中的另外两个属性a和b
+            问题:如果逻辑代码很简单,可以把表达式直接写在{{}}中
+            如果逻辑代码很复杂, 直接把表达式写在{{}}中不合适
+            此时, 就用到了计算属性
+        -->
+        <!-- 计算属性的用法和data中的属性用法一样 -->
+        <p>{{comC}}</p>
+        <p>{{comC}}</p>
+        <p>{{comB()}}</p>
+        <p>{{comB()}}</p>
+
+
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                a: 2,
+                b: 5,
+                c: 0
+            },
+            // 计算属性
+            /*
+             * 计算属性是Vue实例的一个选项
+             * 计算属性的值是一个对象
+             * 计算属性也是属性,只不过值是带有返回值的函数
+             * 当data中的属性一发生变化, 会自动调用计算属性的方法
+             */
+            computed: {
+                comC: function() {
+                    console.log('com');
+
+                    return this.a + this.b
+                }
+            },
+            methods: {
+                comB: function() {
+                    console.log('www');
+
+                    return this.a + this.b
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
